@@ -4,8 +4,8 @@
 2. 행과 열을 분석해서 결과를 알려준다. 행. 열
 3. nodejs 를 사용한다
 
-<img width="1062" alt="스크린샷 2024-12-22 13 33 31" src="https://github.com/user-attachments/assets/598eb3fe-33a8-4757-8e4a-e72a36908333" />
-<img width="988" alt="스크린샷 2024-12-22 13 33 40" src="https://github.com/user-attachments/assets/be21d549-f5c2-4d1f-8e44-02ff790ca5f2" />
+<img width="1062" alt="스크린샷 2024-12-22 13 33 31" src="https://github.com/user-attachments/assets/2462ad77-456f-4edb-9ac3-cb5fff850d41" />
+<img width="988" alt="스크린샷 2024-12-22 13 33 40" src="https://github.com/user-attachments/assets/31e57c47-73a1-4726-9821-9ab6c7ce6ba0" />
 
 2번째 -> 제일 글자 수 많은것 부터 순차적으로 정렬 하고 각 결과의 행번호와 글자 수가 같이 나오게 코딩 
 
