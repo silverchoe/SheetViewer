@@ -8,6 +8,7 @@
 
 2번째 -> 제일 글자 수 많은것 부터 순차적으로 정렬 하고 각 결과의 행번호와 글자 수가 같이 나오게 코딩 
 
-<img width="268" alt="스크린샷 2024-12-22 23 56 05" src="https://github.com/user-attachments/assets/efeebae5-c868-4726-ac40-f5efb5764bf8" />
-2번째 -> 제일 글자 수 많은것 부터 순차적으로 정렬 하고 각 결과의 행번호와 글자 수가 같이 나오게 코딩 
+<img width="1087" alt="스크린샷 2024-12-23 19 02 43" src="https://github.com/user-attachments/assets/03345c23-be66-47ee-80a5-0478d0ed6b24" />
+
+ 
 
