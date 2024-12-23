@@ -9,22 +9,6 @@ if (process.argv.length < 3) {
 
 const filename = process.argv[2];
 
-// 한글 텍스트 길이 계산 함수
-function getKoreanTextLength(text) {
-    let length = 0;
-    for (let i = 0; i < text.length; i++) {
-        const char = text.charAt(i);
-        if (char === ' ') {
-            length += 1;
-        } else if (/[\u3131-\u314E\u314F-\u3163\uAC00-\uD7A3]/.test(char)) {
-            length += 2;
-        } else {
-            length += 1;
-        }
-    }
-    return length;
-}
-
 // 데이터를 저장할 배열
 const rows = [];
 
@@ -34,9 +18,13 @@ fs.createReadStream(filename)
     .on('data', (row) => {
         if (row[1]) {
             const rowNumber = row[0];
-            const koreanText = row[1];
-            const textLength = getKoreanTextLength(koreanText);
-            rows.push({ rowNumber, text: koreanText, length: textLength });
+            const text = row[1].trim(); // 앞뒤 공백 제거
+            const textLength = text.length; // 모든 문자를 1자로 계산
+            rows.push({ 
+                rowNumber, 
+                text, 
+                length: textLength
+            });
         }
     })
     .on('error', (error) => {
@@ -46,11 +34,36 @@ fs.createReadStream(filename)
         // 글자 수 기준으로 내림차순 정렬
         rows.sort((a, b) => b.length - a.length);
         
-        // 정렬된 결과 출력
+        // 같은 글자 수를 가진 행들을 그룹화
+        let currentRank = 1;
+        let currentLength = -1;
+        let sameRankRows = [];
+        
         console.log('\n=== 글자 수 기준 정렬 결과 ===');
+        
         rows.forEach((row, index) => {
-            console.log(`${index + 1}위: 행${row.rowNumber} (${row.length}자)`);
+            if (row.length !== currentLength) {
+                // 이전 그룹 출력
+                if (sameRankRows.length > 0) {
+                    const rowNumbers = sameRankRows.map(r => `행${r.rowNumber}`).join(', ');
+                    console.log(`${currentRank}위: ${rowNumbers} (${currentLength}자)`);
+                }
+                
+                // 새 그룹 시작
+                currentLength = row.length;
+                sameRankRows = [row];
+                currentRank = index + 1;
+            } else {
+                // 같은 글자 수는 같은 그룹에 추가
+                sameRankRows.push(row);
+            }
         });
+        
+        // 마지막 그룹 출력
+        if (sameRankRows.length > 0) {
+            const rowNumbers = sameRankRows.map(r => `행${r.rowNumber}`).join(', ');
+            console.log(`${currentRank}위: ${rowNumbers} (${currentLength}자)`);
+        }
         
         console.log('\nCSV 파일 처리 완료');
     });
